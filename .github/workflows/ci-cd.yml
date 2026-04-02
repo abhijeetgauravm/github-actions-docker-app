@@ -27,29 +27,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Pull Image
-        run: docker pull ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
+    - name: Pull Image
+      run: docker pull ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
-      - name: Run Container
-        run: |
-          docker run -d -p 5000:5000 --name flask-app \
-          ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
+    - name: Run Container
+      run: |
+        docker run -d -p 5000:5000 --name flask-app \
+        ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
-  test:
-    needs: deploy
-    runs-on: ubuntu-latest
+    - name: Wait for App
+      run: sleep 10
 
-    steps:
-      - name: Wait for App
-        run: sleep 10
-
-      - name: Test Application
-        run: curl -f http://localhost:5000
-
+    - name: Test Application
+      run: curl -f http://localhost:5000
+      
   notify:
-    needs: test
-    runs-on: ubuntu-latest
-    if: always()
+    needs: deploy
 
     steps:
       - name: Send Email Notification
