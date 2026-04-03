@@ -23,10 +23,10 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
+  needs: build
+  runs-on: ubuntu-latest
 
-    steps:
+  steps:
     - name: Pull Image
       run: docker pull ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
@@ -36,10 +36,21 @@ jobs:
         ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
     - name: Wait for App
-      run: sleep 10
+      run: sleep 20
+
+    - name: Check running containers
+      run: docker ps -a
+
+    - name: Check container logs
+      run: docker logs flask-app
 
     - name: Test Application
-      run: curl -f http://localhost:5000
+      run: |
+        for i in {1..5}; do
+          curl -f http://localhost:5000 && break
+          echo "Retrying..."
+          sleep 5
+        done  
       
   notify:
     needs: deploy
