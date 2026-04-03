@@ -35,6 +35,8 @@ jobs:
         docker run -d -p 5000:5000 --name flask-app \
         ${{ secrets.DOCKER_USERNAME }}/flask-app:latest
 
+        docker ps
+
     - name: Wait for App
       run: sleep 20
 
@@ -46,11 +48,16 @@ jobs:
 
     - name: Test Application
       run: |
-        for i in {1..5}; do
-          curl -f http://localhost:5000 && break
-          echo "Retrying..."
-          sleep 5
-        done  
+        for i in {1..10}; do
+          echo "Checking app... attempt $i"
+          if curl -s http://localhost:5000; then
+           echo "App is running!"
+           exit 0
+          fi
+          sleep 3
+        done
+        echo "App failed to start"
+        exit 1  
       
   notify:
     needs: deploy
