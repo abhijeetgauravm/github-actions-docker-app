@@ -1,9 +1,13 @@
 This project demonstrates a CI/CD pipeline using GitHub Actions that:
 
 Builds a Docker image
+
 Pushes it to Docker Hub
+
 Deploys the app on GitHub runner
+
 Tests the deployment
+
 Sends email notification
 
 
