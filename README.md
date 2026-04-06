@@ -53,13 +53,13 @@ Used curl to validate app is running
 Used GitHub Action to send email
 
 
-🚧 Challenges Faced                            Challenge	Solution
+🚧 Challenges Faced                                       Challenge	Solution
 
-Docker authentication failed	                 Used secrets properly
+Docker authentication failed	                           Used secrets properly
 
-Container not starting	                       Added delay before testing
+Container not starting	                            Added delay before testing
 
-Port issues	                                   Exposed and mapped correctly
+Port issues	                                      Exposed and mapped correctly
 
 
 🔐 Security Best Practices
