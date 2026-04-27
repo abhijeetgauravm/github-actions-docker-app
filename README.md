@@ -1,74 +1,60 @@
-📌 Overview
+# 📌 Overview
 
 This project demonstrates a CI/CD pipeline using GitHub Actions that:
 
-Builds a Docker image
+- Builds a Docker image  
+- Pushes it to Docker Hub  
+- Deploys the app on GitHub runner  
+- Tests the deployment  
+- Sends email notification  
 
-Pushes it to Docker Hub
+---
 
-Deploys the app on GitHub runner
+# ⚙️ Steps Followed
 
-Tests the deployment
-
-Sends email notification
-
-
-⚙️ Steps Followed
-1. Created Flask App
-
+## 1. Created Flask App
 A simple app returning a welcome message.
 
-2. Dockerized Application
+## 2. Dockerized Application
+- Used Python slim image  
+- Installed Flask  
+- Exposed port 5000  
 
-Used Python slim image
+## 3. Setup GitHub Actions
+- Created workflow file  
+- Defined jobs: build, deploy, test, notify  
 
-Installed Flask
+## 4. Docker Integration
+- Used Docker Hub credentials via secrets  
+- Built and pushed image  
 
-Exposed port 5000
+## 5. Deployment
+- Pulled image in runner  
+- Ran container  
 
-3. Setup GitHub Actions
+## 6. Testing
+- Used curl to validate app is running  
 
-Created workflow file
+## 7. Email Notification
+- Used GitHub Action to send email  
 
-Defined jobs: build, deploy, test, notify
+---
 
-4. Docker Integration
+# 🚧 Challenges Faced
 
-Used Docker Hub credentials via secrets
+| Challenge                      | Solution                              |
+|--------------------------------|--------------------------------------|
+| Docker authentication failed   | Used secrets properly                |
+| Container not starting         | Added delay before testing           |
+| Port issues                    | Exposed and mapped correctly         |
 
-Built and pushed image
+---
 
-5. Deployment
+# 🔐 Security Best Practices
 
-Pulled image in runner
-
-Ran container
-
-6. Testing
-
-Used curl to validate app is running
-
-7. Email Notification
-
-Used GitHub Action to send email
-
-
-🚧 Challenges Faced                                       Challenge	Solution
-
-Docker authentication failed	                           Used secrets properly
-
-Container not starting	                            Added delay before testing
-
-Port issues	                                      Exposed and mapped correctly
-
-
-🔐 Security Best Practices
-
-Used GitHub Secrets for credentials
-
-Avoided hardcoding sensitive data
-
-Limited permissions
+- Used GitHub Secrets for credentials  
+- Avoided hardcoding sensitive data  
+- Limited permissions  
 
 
 📸 Screenshots
